@@ -1,7 +1,8 @@
 #Part 1: Merges the training and the test sets to create one data set.
 
-#Read the tables from train data and put into one DF
 features <- read.table("./UCI HAR Dataset/features.txt")
+
+#Read the tables from train data and put into one DF
 trainSet <- read.table("./UCI HAR Dataset/train/X_train.txt")
 colnames(trainSet) <- features$V2
 trainLabel <- read.table("./UCI HAR Dataset/train/y_train.txt")
