@@ -34,5 +34,9 @@ for (i in 1:6){
 }
 
 #Part 5: Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
-tidySet <- aggregate(. ~ Label+Subject, data = result, mean)
-write.table(means, file="tidySet.txt", row.names=FALSE)
+tidySet <- aggregate(. ~ Label+Subject, data = merger, mean)
+write.table(tidySet, file="tidySet.txt", row.names=FALSE)
+
+result$Subject
+result$Label
+
