@@ -16,28 +16,23 @@ testSubject <- read.table("./UCI HAR Dataset/test/subject_test.txt")
 test <- cbind(testSet, testLabel, testSubject)
 
 #Merge DF
-mergedData <-rbind(train,test)
+merger <-rbind(train,test)
 
 #Part 2: Extracts only the measurements on the mean and standard deviation for each measurement. 
-extractedColumns <- grep("mean\\(\\)|std\\(\\)", features$V2)
-extractedValues <- mergedData[c(extractedColumns, 562,563)]
+meanstd <- grep("mean\\(\\)|std\\(\\)", features$V2)
+result <- merger[c(meanstd, 562,563)]
 
 
 #Part 3: Uses descriptive activity names to name the activities in the data set
-colnames(mergedData)[562] <- "Label"
-colnames(mergedData)[563] <- "Subject"
+colnames(merger)[562] <- "Label"
+colnames(merger)[563] <- "Subject"
 activityLabels <- c("walking", "walking upstairs", "walking downstairs","sitting", "standing", "laying")
 
 #Part 4: Appropriately labels the data set with descriptive activity names. 
 for (i in 1:6){
-  mergedData$Label[mergedData$Label== i] <- activityLabels[i]
+  merger$Label[merger$Label== i] <- activityLabels[i]
 }
 
 #Part 5: Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
-tidySet <- aggregate(. ~ Label+Subject, data = extractedValues, mean)
+tidySet <- aggregate(. ~ Label+Subject, data = result, mean)
 write.table(means, file="tidySet.txt", row.names=FALSE)
-
-
-
-
-
