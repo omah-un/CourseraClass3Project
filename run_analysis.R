@@ -18,6 +18,8 @@ test <- cbind(testSet, testLabel, testSubject)
 
 #Merge DF
 merger <-rbind(train,test)
+colnames(merger)[562] <- "Label"
+colnames(merger)[563] <- "Subject"
 
 #Part 2: Extracts only the measurements on the mean and standard deviation for each measurement. 
 meanstd <- grep("mean\\(\\)|std\\(\\)", features$V2)
@@ -25,8 +27,6 @@ result <- merger[c(meanstd, 562,563)]
 
 
 #Part 3: Uses descriptive activity names to name the activities in the data set
-colnames(merger)[562] <- "Label"
-colnames(merger)[563] <- "Subject"
 activityLabels <- c("walking", "walking upstairs", "walking downstairs","sitting", "standing", "laying")
 
 #Part 4: Appropriately labels the data set with descriptive activity names. 
